@@ -4,7 +4,6 @@ const { Configuration, OpenAIApi } = require('openai');
 export class ChatGptService {
   async getText(textChat: string) {
     const configuration = new Configuration({
-      apiKey: '',
     });
     const openai = await new OpenAIApi(configuration);
     const response = await openai.createCompletion({

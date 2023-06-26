@@ -8,8 +8,6 @@ export type CartDocument = Carts & Document;
 
 @Schema()
 export class Carts {
- 
-
   @Prop()
   items: any[];
 
@@ -18,6 +16,9 @@ export class Carts {
 
   @Prop({ default: 0 })
   priceItemsNotFlashSale: number;
+
+  @Prop({ default: 0 })
+  fullPrice: number;
 
   @Prop({ default: 0 })
   priceItemsHaveFlashSale: number;

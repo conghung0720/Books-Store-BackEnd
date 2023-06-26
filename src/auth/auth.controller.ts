@@ -51,8 +51,8 @@ export class AuthController {
   }
 
   @Get('profile')
+  // @Roles(Role.Admin)
   @UseGuards(AuthGuard, RolesGuard)
-  // @Roles(Role.)
   async getProfile(@Request() req) {
     const userJWT = await req.user;
     return await this.userSerivce.findId(userJWT.username);

@@ -25,7 +25,7 @@ export class Book {
   @Prop()
   title: string;
 
-  @Prop()
+  @Prop({ data: Buffer, contentType: String })
   images: string[];
 
   @Prop()
@@ -42,5 +42,11 @@ export class Book {
 
   @Prop()
   supplier: string;
+
+  @Prop({ default: 0 })
+  rating?: number;
+
+  @Prop({ default: 0 })
+  quantityUserRating?: number;
 }
 export const BookSchema = SchemaFactory.createForClass(Book);

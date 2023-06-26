@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Schema as MongooseSchema } from 'mongoose';
+import { Schema as MongooseSchema, ObjectId } from 'mongoose';
 import { Category } from './category.models';
 import { Book } from './book.models';
 import { User } from './user.models';
@@ -13,12 +13,12 @@ export class Comments {
     ref: 'book',
     required: true,
   })
-  book: Book;
+  book: string;
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     ref: 'user',
   })
-  user: User;
+  user: string;
   @Prop({ type: Date, default: Date.now })
   dateComment: Date;
   @Prop()

@@ -12,7 +12,12 @@ export class CartsController {
 
   @Get(':id')
   async getAll(@Param('id') id: string) {
-    console.log(id);
     return await this.cartsSerivce.fetchId(id);
+  }
+
+  @Get('/delete/:id')
+  async deleteCart(@Param('id') id: string) {
+    console.log(id);
+    return await this.cartsSerivce.deleteCart(id);
   }
 }

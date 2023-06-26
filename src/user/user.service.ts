@@ -37,4 +37,15 @@ export class UserService {
     const newUser = new this.userModel({ ...hashPasswordUser, cartId: idCart });
     return await newUser.save();
   }
+  async updateUserById(id: string, updatedFields: Partial<User>): Promise<User | null> {
+    const user = await this.userModel.findById(id);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    Object.assign(user, updatedFields);
+    await user.save();
+
+    return user;
+  }
 }

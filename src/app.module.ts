@@ -38,27 +38,32 @@ import { OrdersDetailService } from './orders-detail/orders-detail.service';
 import { CartsController } from './carts/carts.controller';
 import { CartsModule } from './carts/carts.module';
 import { CartsSchema } from './schemas/carts.models';
-
+import { OrdersDetailsSchema } from './schemas/ordersDetails.models';
+import { CommentsSchema } from './schemas/comments.models';
+import { CommentsService } from './comments/comments.service';
+import { OrdersDetailModule } from './orders-detail/orders-detail.module';
 
 @Module({
   imports: [
     AuthModule,
     BookModule,
     UserModule,
-    MongooseModule.forRoot(
-      '',
-    ),
+   
     MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
     CategoryModule,
     MongooseModule.forFeature([{ name: 'category', schema: CategorySchema }]),
     MongooseModule.forFeature([{ name: 'book', schema: BookSchema }]),
     MongooseModule.forFeature([{ name: 'flashsale', schema: FlashSaleSchema }]),
     MongooseModule.forFeature([{ name: 'carts', schema: CartsSchema }]),
+    MongooseModule.forFeature([
+      { name: 'ordersDetails', schema: OrdersDetailsSchema },
+    ]),
+    MongooseModule.forFeature([{ name: 'comments', schema: CommentsSchema }]),
     HistoryOrderModule,
     RolesModule,
     FlashSaleModule,
-    CommentsModule,
     CartsModule,
+    OrdersDetailModule,
   ],
   controllers: [
     AppController,
@@ -82,6 +87,7 @@ import { CartsSchema } from './schemas/carts.models';
     AuthService,
     ChatGptService,
     OrdersDetailService,
+    CommentsService,
   ],
 })
 export class AppModule {}

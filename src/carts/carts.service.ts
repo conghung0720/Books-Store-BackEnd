@@ -12,6 +12,7 @@ export class CartsService {
     const firstCart = {
       items: [],
       quantityItems: 0,
+      fullPrice: 0,
       priceItemsNotFlashSale: 0,
       priceItemsHaveFlashSale: 0,
     };
@@ -22,7 +23,6 @@ export class CartsService {
 
   async edit(idCart: string, book: any) {
     const fetchId = await this.fetchId(idCart);
-    console.log(fetchId);
 
     const existingItemIndex = fetchId.items.findIndex(
       (item) => item._id === book._id,
@@ -34,10 +34,21 @@ export class CartsService {
       fetchId.items.push(book);
     }
 
+    const fullPrice: Number = fetchId.items?.reduce(
+      (accumulator, currentValue) => {
+        let values: Number = 0;
+        if (currentValue.quantity) {
+          values += accumulator + +currentValue.price * +currentValue.quantity;
+        }
+        return values;
+      },
+      0,
+    );
+
     const editBooks = await this.cartModel
       .findOneAndUpdate(
         { _id: idCart },
-        { items: fetchId.items },
+        { items: fetchId.items, fullPrice: fullPrice },
         { new: true },
       )
       .exec();
@@ -47,8 +58,22 @@ export class CartsService {
 
   async fetchId(id: string) {
     const check = await this.cartModel.findById(id).exec();
-    console.log(id);
-    console.log(check);
+
     return check;
+  }
+  async deleteCart(id: string) {
+    const update = {
+      items: [],
+      quantityItems: 0,
+      fullPrice: 0,
+      priceItemsNotFlashSale: 0,
+      priceItemsHaveFlashSale: 0,
+    };
+
+    const updatedCart = await this.cartModel
+      .findOneAndUpdate({ _id: id }, update, { new: true })
+      .exec();
+
+    return updatedCart;
   }
 }

@@ -26,7 +26,11 @@ export class User {
   @Prop()
   roles: Role[];
 
-  @Prop({ default: 'https://simpleicon.com/wp-content/uploads/user1.png' })
+  @Prop({
+    data: Buffer,
+    contentType: String,
+    default: 'https://simpleicon.com/wp-content/uploads/user1.png',
+  })
   avatar: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'carts' })

@@ -7,9 +7,6 @@ import { CartsModule } from 'src/carts/carts.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://hungdc03:cangimatkhau1@cluster0.h7wnxaj.mongodb.net/?retryWrites=true&w=majority',
-    ),
     MongooseModule.forFeature([{ name: 'user', schema: UserSchema }]),
     CartsModule
   ],
